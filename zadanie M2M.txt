@@ -1,0 +1,16 @@
+Technologie / nastroje
+
+·         C# / PHP         
+·         MS SQL / MySQL / …
+·         Apache / ISS
+·         …
+Cielom je vytvorenie web aplikacie pre evidenciu knih a citatelov s moznostou vypozicania. Vychadzaj z reality, tak ako kniznica funguje.
+Požiadavky
+·         V kniznici je X druhov knih a z kazdej knihy moze byt Y kusov.
+·         Jeden citatel si moze pozicat X druhov knih (max. napr. Z) a z kazdej knihy 1 kus.
+·         Neda sa pozicat viac knih ako je v kniznici prave dostupnych (t.j. berieme do uvahy pocet knih Y druhu X  – pozicane N).
+·         Nepocitame s tym, ze citatel ma online pristup do systemu, cely proces pozicania ma na starosti pracovnik kniznice
+ 
+
+V pripade otazok mi prosim napiste. Ked budete mat hotove, tak si individualne prejdeme ako ste postupovali a ako vasa aplikacia funguje.
+Vdaka.
