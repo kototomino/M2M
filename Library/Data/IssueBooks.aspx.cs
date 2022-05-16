@@ -101,7 +101,7 @@ namespace Library.Data
 
 						} else 
 						{
-							msgError.Text = "Book cannot be issued quantity of available is 0";
+							msgError.Text = "Book cannot be issued quantity of available is 0 or book was not found";
 							msgSuccess.Text = "";
 						}
 
@@ -126,9 +126,15 @@ namespace Library.Data
 				{
 					sqlConnection.Open();
 					string value = "";
-					TextBox textBox = (TextBox)gvBook.FooterRow.FindControl("txtBorrowed_books_titlesFooter");
-					string meno = gvBook.Rows[e.RowIndex].Cells["Title of Book"].ToString();
-					value = meno.Text;
+					
+
+					foreach (GridViewRow row in gvBook.Rows)
+					{
+						Label title = row.FindControl("idTitleOfBook") as Label;
+						value = title.Text;
+						
+					}
+
 					string queryReturn = "UPDATE Book set available=available+1 where bookName='" + value + "'";
 
 					SqlCommand sqlCommandCheck = new SqlCommand(queryReturn, sqlConnection);

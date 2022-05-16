@@ -46,7 +46,8 @@
 		<ul>
 			<li><a href= "Management.aspx" id="homeFromIssue">HOME</a></li>
 		
-		</ul></nav>
+		</ul>
+</nav>
 		<div>
 		
 		
@@ -82,7 +83,7 @@
 
 					<asp:TemplateField HeaderText="Contact">
 					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("contact") %>' runat ="server" Font-Size="30px" ></asp:Label>
+						<asp:Label  Text ='<%#Eval("contact") %>' runat ="server" Font-Size="30px" ></asp:Label>
 					</ItemTemplate>
 						<EditItemTemplate>
 							<asp:TextBox ID="txtContact" Text='<%#Eval("contact") %>' runat="server" Font-Size="30px" ></asp:TextBox>
@@ -94,7 +95,7 @@
 
 					<asp:TemplateField HeaderText="Title Of Book">
 					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("borrowed_books_titles") %>' runat ="server" Font-Size="30px" ></asp:Label>
+						<asp:Label ID="idTitleOfBook" Text ='<%#Eval("borrowed_books_titles") %>' runat ="server" Font-Size="30px" ></asp:Label>
 					</ItemTemplate>
 						<EditItemTemplate>
 							<asp:TextBox id="txtBorrowed_books_titles" Text='<%#Eval("borrowed_books_titles") %>' runat="server" Font-Size="30px" ></asp:TextBox>
