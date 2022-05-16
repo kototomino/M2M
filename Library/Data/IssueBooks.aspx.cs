@@ -60,51 +60,81 @@ namespace Library.Data
 				{
 					using (SqlConnection sqlConnection = new SqlConnection(connectionString))
 					{
-						int quant = 0;
+						int result = 0;
 						sqlConnection.Open();
 						TextBox textBox = (TextBox)gvBook.FooterRow.FindControl("txtBorrowed_books_titlesFooter");
+						TextBox textBoxName = (TextBox)gvBook.FooterRow.FindControl("txtNameFooter");
+						TextBox textBoxContact = (TextBox)gvBook.FooterRow.FindControl("txtContactFooter");
+						string valueName = textBoxName.Text;
 						string value = textBox.Text;
-						string queryUpdate = "UPDATE Book set available=available-1 where bookName='" + value + "'";
-						string queryCheck = "SELECT * FROM Book WHERE bookName='" + value + "'";
-						SqlCommand sqlCommandCheck = new SqlCommand(queryCheck, sqlConnection);
-						sqlCommandCheck.ExecuteNonQuery();
-						DataTable dataTable = new DataTable();
-						SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommandCheck);
-						sqlDataAdapter.Fill(dataTable);
-						foreach (DataRow row in dataTable.Rows)
+						string valueContact = textBoxContact.Text;
+						string queryHelp = "SELECT * FROM Subscriber where borrowed_books_titles='" + value + "' and name='" + valueName
+							+"' and contact='"+valueContact + "'";
+						SqlCommand command = new SqlCommand(queryHelp, sqlConnection);
+
+						try
 						{
-							quant = Convert.ToInt32(row["available"].ToString());
+							result = (int)(command.ExecuteScalar());
 						}
-
-						if (quant > 0)
+						catch (Exception ex)
 						{
 
-							string query = "INSERT INTO Subscriber (name,contact,borrowed_books_titles)" +
-								" VALUES (@name,@contact,@borrowed_books_titles)";
-							SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-							sqlCommand.Parameters.AddWithValue("@name", (gvBook.FooterRow.FindControl("txtNameFooter") as TextBox).Text.Trim());
-							sqlCommand.Parameters.AddWithValue("@contact", (gvBook.FooterRow.FindControl("txtContactFooter") as TextBox).Text.Trim());
-							sqlCommand.Parameters.AddWithValue("@borrowed_books_titles", (gvBook.FooterRow.FindControl("txtBorrowed_books_titlesFooter") as TextBox).Text.Trim());
-							sqlCommand.ExecuteNonQuery();
-
-
-
-
-							SqlCommand sqlCommandUpdate = new SqlCommand(queryUpdate, sqlConnection);
-
-							sqlCommandUpdate.ExecuteNonQuery();
-							LoadData();
-
-							msgSuccess.Text = "Book was issued";
-
-							msgError.Text = "";
-
-						} else 
-						{
-							msgError.Text = "Book cannot be issued quantity of available is 0 or book was not found";
-							msgSuccess.Text = "";
+							msgError.Text = ex.Message;
 						}
+						
+						
+						if (result > 0)
+						{
+							msgError.Text = "CANNOT BE ISSUED";
+						}
+						else
+						{
+							int quant = 0;
+							
 
+							string queryUpdate = "UPDATE Book set available=available-1 where bookName='" + value + "'";
+							string queryCheck = "SELECT * FROM Book WHERE bookName='" + value + "'";
+							SqlCommand sqlCommandCheck = new SqlCommand(queryCheck, sqlConnection);
+							sqlCommandCheck.ExecuteNonQuery();
+							DataTable dataTable = new DataTable();
+							SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommandCheck);
+							sqlDataAdapter.Fill(dataTable);
+							foreach (DataRow row in dataTable.Rows)
+							{
+								quant = Convert.ToInt32(row["available"].ToString());
+							}
+
+							if (quant > 0)
+							{
+
+								string query = "INSERT INTO Subscriber (name,contact,borrowed_books_titles)" +
+									" VALUES (@name,@contact,@borrowed_books_titles)";
+								SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+								sqlCommand.Parameters.AddWithValue("@name", (gvBook.FooterRow.FindControl("txtNameFooter") as TextBox).Text.Trim());
+								sqlCommand.Parameters.AddWithValue("@contact", (gvBook.FooterRow.FindControl("txtContactFooter") as TextBox).Text.Trim());
+								sqlCommand.Parameters.AddWithValue("@borrowed_books_titles", (gvBook.FooterRow.FindControl("txtBorrowed_books_titlesFooter") as TextBox).Text.Trim());
+								sqlCommand.ExecuteNonQuery();
+
+
+
+
+								SqlCommand sqlCommandUpdate = new SqlCommand(queryUpdate, sqlConnection);
+
+								sqlCommandUpdate.ExecuteNonQuery();
+								LoadData();
+
+								msgSuccess.Text = "Book was issued";
+
+								msgError.Text = "";
+
+							}
+							else
+							{
+								msgError.Text = "Book cannot be issued quantity of available is 0 or book was not found";
+								msgSuccess.Text = "";
+							}
+
+						}
 					}
 				}
 			}
@@ -147,10 +177,6 @@ namespace Library.Data
 					sqlCommand.Parameters.AddWithValue("@Id", Convert.ToInt32(gvBook.DataKeys[e.RowIndex].Value.ToString()));
 					sqlCommand.ExecuteNonQuery();
 
-
-
-
-					
 
 					msgSuccess.Text = "Subscriber returned a book";
 
