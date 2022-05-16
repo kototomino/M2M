@@ -12,8 +12,9 @@ namespace Library
 {
 	public partial class Management : System.Web.UI.Page
 	{
-		string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" +
-			"C:\\Users\\Anonym\\Desktop\\M2M\\Library\\App_Data\\Database1.mdf;Integrated Security=True";
+		string connectionString = "Data Source=(LocalDB)\\" +
+			"MSSQLLocalDB;AttachDbFilename=C:\\" +
+			"Users\\Anonym\\Desktop\\M2M\\Library\\App_Data\\Database1.mdf;Integrated Security=True";
 		
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -65,14 +66,13 @@ namespace Library
 					using (SqlConnection sqlConnection = new SqlConnection(connectionString))
 					{
 						sqlConnection.Open();
-						string query = "INSERT INTO Book (Id,bookName,autorName,quantity,subscriber)" +
-							" VALUES (@Id,@bookName,@autorName,@quantity,@subscriber)";
+						string query = "INSERT INTO Book (Id,bookName,autorName,quantity,available)" +
+							" VALUES (@Id,@bookName,@autorName,@quantity,@quantity)";
 						SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 						sqlCommand.Parameters.AddWithValue("@Id", (gvBook.FooterRow.FindControl("txtIdFooter") as TextBox).Text.Trim());
 						sqlCommand.Parameters.AddWithValue("@bookName", (gvBook.FooterRow.FindControl("txtBookNameFooter") as TextBox).Text.Trim());
 						sqlCommand.Parameters.AddWithValue("@autorName", (gvBook.FooterRow.FindControl("txtAutorNameFooter") as TextBox).Text.Trim());
 						sqlCommand.Parameters.AddWithValue("@quantity", (gvBook.FooterRow.FindControl("txtQuantityFooter") as TextBox).Text.Trim());
-						sqlCommand.Parameters.AddWithValue("@subscriber", (gvBook.FooterRow.FindControl("txtSubscriberFooter") as TextBox).Text.Trim());
 						sqlCommand.ExecuteNonQuery();
 						LoadData();
 						
@@ -81,7 +81,7 @@ namespace Library
 						msgError.Text = "";
 						
 					}
-
+					
 				}
 			}
 			catch (Exception ex)
@@ -111,13 +111,12 @@ namespace Library
 				using (SqlConnection sqlConnection = new SqlConnection(connectionString))
 				{
 					sqlConnection.Open();
-					string query = "UPDATE  Book SET bookName=@bookName,autorName=@autorName,quantity=@quantity,subscriber=@subscriber" +
+					string query = "UPDATE  Book SET bookName=@bookName,autorName=@autorName,quantity=@quantity" +
 						" WHERE Id=@Id";
 					SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 					sqlCommand.Parameters.AddWithValue("@bookName", (gvBook.Rows[e.RowIndex].FindControl("txtBookName") as TextBox).Text.Trim());
 					sqlCommand.Parameters.AddWithValue("@autorName", (gvBook.Rows[e.RowIndex].FindControl("txtAutorName") as TextBox).Text.Trim());
 					sqlCommand.Parameters.AddWithValue("@quantity", (gvBook.Rows[e.RowIndex].FindControl("txtQuantity") as TextBox).Text.Trim());
-					sqlCommand.Parameters.AddWithValue("@subscriber", (gvBook.Rows[e.RowIndex].FindControl("txtSubscriber") as TextBox).Text.Trim());
 					sqlCommand.Parameters.AddWithValue("@Id", Convert.ToInt32(gvBook.DataKeys[e.RowIndex].Value.ToString()));
 					sqlCommand.ExecuteNonQuery();
 					gvBook.EditIndex = -1;
@@ -155,7 +154,7 @@ namespace Library
 					msgError.Text = "";
 					
 				}
-
+				
 
 			}
 			catch (Exception ex)
@@ -165,6 +164,23 @@ namespace Library
 			}
 		}
 
-		
+		protected void SearchButtonID_Click(object sender, EventArgs e)
+		{
+			using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+			{
+
+				string query = "SELECT * FROM Book WHERE Id LIKE '%" + txtSearcherID.Text + "%'";
+				sqlConnection.Open();
+				SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection);
+				SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+
+				DataTable dataTable = new DataTable();
+				adapter.Fill(dataTable);
+				gvBook.DataSource = dataTable;
+				gvBook.DataBind();
+				
+			}
+		}
 	}
 }

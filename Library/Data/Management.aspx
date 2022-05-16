@@ -40,6 +40,7 @@
 			text-transform: uppercase;
 
 		}		
+		
 	</style>
 
 </head>
@@ -48,12 +49,17 @@
 		<h1>Welcome to the Library</h1> 
 		<nav>
 		<ul>
+			<li><a href= "IssueBooks.aspx" id="IssueBooks">Issue a book</a></li>
 			<li><a href= "SearchSubscribers.aspx" id="SearchSubscribers">Search Subscribers</a></li>
 			<li><a href= "SearchBooks.aspx " id="SearchBooks">Search Books</a></li>
 			<li><a href= "Login.aspx" id="LogOut">Log Out</a></li>
+			<li><asp:TextBox  id="txtSearcherID" type="text" placeholder="Find a book by ID" runat="server"  ></asp:TextBox></li>
+			<li><asp:Button ID="SearchButtonID" runat="server" Text="Search" Width="90px" OnClick="SearchButtonID_Click"   /></li>
 		</ul></nav>
+		<div>
 		
-        
+		
+        </div>
 			<center>
             <asp:GridView ID="gvBook" runat="server" OnRowCommand="gvBook_RowCommand" OnRowEditing="gvBook_RowEditing"
 				OnRowCancelingEdit="gvBook_RowCancelingEdit" OnRowUpdating="gvBook_RowUpdating" OnRowDeleting="gvBook_RowDeleting"	AutoGenerateColumns ="false" ShowFooter="true" DataKeyNames="Id"
@@ -116,18 +122,6 @@
 						</EditItemTemplate>
 						<FooterTemplate>
 							<asp:TextBox ID="txtQuantityFooter" runat="server" Font-Size="30px" ></asp:TextBox>
-						</FooterTemplate>
-						</asp:TemplateField>
-
-					<asp:TemplateField HeaderText="Subscriber">
-					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("subscriber") %>' runat ="server" Font-Size="30px" ></asp:Label>
-					</ItemTemplate>
-						<EditItemTemplate>
-							<asp:TextBox ID="txtSubscriber" Text='<%#Eval("subscriber") %>' runat="server" Font-Size="30px" ></asp:TextBox>
-						</EditItemTemplate>
-						<FooterTemplate>
-							<asp:TextBox ID="txtSubscriberFooter" runat="server" Font-Size="30px" ></asp:TextBox>
 						</FooterTemplate>
 						</asp:TemplateField>
 					<asp:TemplateField>

@@ -23,7 +23,7 @@ namespace Library
 			using (SqlConnection sqlConnection = new SqlConnection(connectionString))
 			{
 
-				string query = "SELECT * FROM Book WHERE subscriber LIKE '%" + txtSearcher.Text + "%'";
+				string query = "SELECT * FROM Subscriber WHERE name LIKE '%" + txtSearcher.Text + "%'";
 				sqlConnection.Open();
 				SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection);
 				SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);

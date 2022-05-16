@@ -62,12 +62,9 @@
 
 
 		</div>
-             <asp:GridView ID="gvBook" runat="server" 
-				 ShowFooter="true" DataKeyNames="Id"
-				 AutoGenerateColumns ="false"
-				 
+             <asp:GridView ID="gvBook" runat="server"	AutoGenerateColumns ="false" ShowFooter="true" DataKeyNames="Id"
 				BackColor="White" BorderColor="White" Font-Size="30px" Height="500px" 
-				BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" GridLines="None" Width="1500px" style="margin-top: 0px" >
+				BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" GridLines="None" Width="500px">
 				
 				<FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
 				<HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
@@ -78,56 +75,39 @@
 				<SortedAscendingHeaderStyle BackColor="#594B9C" />
 				<SortedDescendingCellStyle BackColor="#CAC9C9" />
 				<SortedDescendingHeaderStyle BackColor="#33276A" />
-				 
+
 				<Columns>
-					<asp:TemplateField HeaderText="ID">
+					<asp:TemplateField HeaderText="Name">
 					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("Id") %>' runat ="server" Font-Size="30px"></asp:Label>
+						<asp:Label Text ='<%#Eval("name") %>' runat ="server" Font-Size="30px"></asp:Label>
 					</ItemTemplate>
 						<EditItemTemplate>
-							<asp:TextBox ID="txtId" Text='<%#Eval("Id") %>' runat="server" Font-Size="30px" ></asp:TextBox>
+							<asp:TextBox ID="txtName" Text='<%#Eval("name") %>' runat="server" Font-Size="30px" ></asp:TextBox>
 						</EditItemTemplate>
 						
 						</asp:TemplateField>
 
-					<asp:TemplateField HeaderText="Book name">
+					<asp:TemplateField HeaderText="Contact">
 					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("bookName") %>' runat ="server" Font-Size="30px" ></asp:Label>
+						<asp:Label Text ='<%#Eval("contact") %>' runat ="server" Font-Size="30px" ></asp:Label>
 					</ItemTemplate>
 						<EditItemTemplate>
-							<asp:TextBox ID="txtBookName" Text='<%#Eval("bookName") %>' runat="server" Font-Size="30px" ></asp:TextBox>
+							<asp:TextBox ID="txtContact" Text='<%#Eval("contact") %>' runat="server" Font-Size="30px" ></asp:TextBox>
 						</EditItemTemplate>
 						
 						</asp:TemplateField>
 
-					<asp:TemplateField HeaderText="Autor">
+					<asp:TemplateField HeaderText="Title Of Book">
 					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("autorName") %>' runat ="server" Font-Size="30px" ></asp:Label>
+						<asp:Label Text ='<%#Eval("borrowed_books_titles") %>' runat ="server" Font-Size="30px" ></asp:Label>
 					</ItemTemplate>
 						<EditItemTemplate>
-							<asp:TextBox ID="txtAutorName" Text='<%#Eval("autorName") %>' runat="server" Font-Size="30px" ></asp:TextBox>
+							<asp:TextBox ID="txtBorrowed_books_titles" Text='<%#Eval("borrowed_books_titles") %>' runat="server" Font-Size="30px" ></asp:TextBox>
 						</EditItemTemplate>
 						
 						</asp:TemplateField>
-
-					<asp:TemplateField HeaderText="Quantity">
-					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("quantity") %>' runat ="server" Font-Size="30px" ></asp:Label>
-					</ItemTemplate>
-						<EditItemTemplate>
-							<asp:TextBox ID="txtQuantity" Text='<%#Eval("quantity") %>' runat="server" Font-Size="30px" ></asp:TextBox>
-						</EditItemTemplate>
-						
-						</asp:TemplateField>
-
-					<asp:TemplateField HeaderText="Subscriber">
-					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("subscriber") %>' runat ="server" Font-Size="30px" ></asp:Label>
-					</ItemTemplate>
-						<EditItemTemplate>
-							<asp:TextBox ID="txtSubscriber" Text='<%#Eval("subscriber") %>' runat="server" Font-Size="30px" ></asp:TextBox>
-						</EditItemTemplate>
-						</asp:TemplateField>
+				
+					
 				</Columns>
 			</asp:GridView>
 		 </form>>

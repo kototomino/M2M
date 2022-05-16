@@ -121,14 +121,7 @@
 						
 						</asp:TemplateField>
 
-					<asp:TemplateField HeaderText="Subscriber">
-					<ItemTemplate>
-						<asp:Label Text ='<%#Eval("subscriber") %>' runat ="server" Font-Size="30px" ></asp:Label>
-					</ItemTemplate>
-						<EditItemTemplate>
-							<asp:TextBox ID="txtSubscriber" Text='<%#Eval("subscriber") %>' runat="server" Font-Size="30px" ></asp:TextBox>
-						</EditItemTemplate>
-						</asp:TemplateField>
+					
 				</Columns>
 			</asp:GridView>
 		</form>
