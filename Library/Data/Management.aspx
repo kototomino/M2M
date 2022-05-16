@@ -24,7 +24,7 @@
 	      	}
 
 		nav ul {
-			float:right;
+			
 			margin-right: 150px
 		}
 		nav ul li {
@@ -47,15 +47,18 @@
 	
 	<body> <form id="form1" runat="server">
 		<h1>Welcome to the Library</h1> 
+		<center>
 		<nav>
 		<ul>
-			<li><a href= "IssueBooks.aspx" id="IssueBooks">Issue a book</a></li>
+			<li><a href= "IssueBooks.aspx" id="IssueBooks">Issue or return a book</a></li>
 			<li><a href= "SearchSubscribers.aspx" id="SearchSubscribers">Search Subscribers</a></li>
 			<li><a href= "SearchBooks.aspx " id="SearchBooks">Search Books</a></li>
 			<li><a href= "Login.aspx" id="LogOut">Log Out</a></li>
 			<li><asp:TextBox  id="txtSearcherID" type="text" placeholder="Find a book by ID" runat="server"  ></asp:TextBox></li>
 			<li><asp:Button ID="SearchButtonID" runat="server" Text="Search" Width="90px" OnClick="SearchButtonID_Click"   /></li>
-		</ul></nav>
+		</ul>
+</nav>
+			</center>
 		<div>
 		
 		

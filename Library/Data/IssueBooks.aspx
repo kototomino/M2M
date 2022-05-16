@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>ISSUE A BOOK</title>
-	<h1>ISSUE A BOOK</h1>
+	<h1>ISSUE OR RETURN A BOOK</h1>
 &nbsp;<style>
 		body {
 			background: linear-gradient(1150deg,#191515,#332c2c);

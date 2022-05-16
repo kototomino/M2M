@@ -74,7 +74,12 @@ namespace Library.Data
 
 						try
 						{
-							result = (int)(command.ExecuteScalar());
+							object resultObject = command.ExecuteScalar();
+							if (resultObject != null)
+							{
+								result = (int)(command.ExecuteScalar());
+							}
+							
 						}
 						catch (Exception ex)
 						{
@@ -85,7 +90,7 @@ namespace Library.Data
 						
 						if (result > 0)
 						{
-							msgError.Text = "CANNOT BE ISSUED";
+							msgError.Text = "Subscriber already issued this book";
 						}
 						else
 						{
